@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import {
@@ -27,12 +28,12 @@ export const ArticleParamsForm = ({
 	currentState,
 	setCurrentState,
 }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [formState, setFormState] = useState<ArticleStateType>(currentState);
 	const rootRef = useRef<HTMLDivElement>(null);
 
 	const handleToggle = () => {
-		setIsOpen(!isOpen);
+		setIsMenuOpen(!isMenuOpen);
 	};
 
 	const handleFormChange = (key: keyof ArticleStateType, value: OptionType) => {
@@ -40,10 +41,10 @@ export const ArticleParamsForm = ({
 	};
 
 	useOutsideClickClose({
-		isOpen,
+		isOpen: isMenuOpen,
 		rootRef,
-		onClose: () => setIsOpen(false),
-		onChange: setIsOpen,
+		onClose: () => setIsMenuOpen(false),
+		onChange: setIsMenuOpen,
 	});
 
 	const handleSubmit = (event: React.FormEvent) => {
@@ -58,9 +59,9 @@ export const ArticleParamsForm = ({
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} onClick={handleToggle} />
+			<ArrowButton isOpen={isMenuOpen} onClick={handleToggle} />
 			<aside
-				className={`${styles.container} ${isOpen ? styles.container_open : ''}`}
+				className={clsx(styles.container, isMenuOpen && styles.container_open)}
 				ref={rootRef}>
 				<form
 					className={styles.form}
