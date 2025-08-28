@@ -10,7 +10,7 @@ const meta: Meta<typeof Select> = {
 export default meta;
 type Story = StoryObj<typeof Select>;
 
-const SelectWithState = () => {
+export const SelectWithState = () => {
 	const options = [
 		{ title: '1 опция', value: '1 опция', className: '' },
 		{ title: '2 опция', value: '2 опция', className: '' },
@@ -30,7 +30,6 @@ const SelectWithState = () => {
 		</>
 	);
 };
-
 export const SelectStory: Story = {
 	render: () => <SelectWithState />,
 };
